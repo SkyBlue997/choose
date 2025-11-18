@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局样式 */
+@layer base {
+  html {
+    /* 防止 iOS Safari 中字体大小调整 */
+    -webkit-text-size-adjust: 100%;
+    /* 平滑滚动 */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', sans-serif;
+    /* 移动端触摸优化 */
+    -webkit-tap-highlight-color: transparent;
+    /* 防止文字选择 */
+    -webkit-touch-callout: none;
+    /* 最小高度为视口高度 */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  /* 移动端按钮和输入框优化 */
+  button, input, select, textarea {
+    /* 移除 iOS 默认样式 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* 移除点击高亮 */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 移动端触摸滚动优化 */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 自定义动画 */
+@layer utilities {
+  /* 弹入动画 */
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s ease-out;
+  }
+
+  /* 渐入动画 */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+
+  /* 硬币翻转动画 */
+  @keyframes spin-flip {
+    0% {
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    25% {
+      transform: rotateY(180deg) rotateX(180deg);
+    }
+    50% {
+      transform: rotateY(360deg) rotateX(360deg);
+    }
+    75% {
+      transform: rotateY(540deg) rotateX(540deg);
+    }
+    100% {
+      transform: rotateY(720deg) rotateX(720deg);
+    }
+  }
+
+  .animate-spin-flip {
+    animation: spin-flip 1s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+
+  /* 安全区域支持 */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .px-safe {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* 防止移动端双击缩放 */
+  .prevent-zoom {
+    touch-action: manipulation;
+  }
+
+  /* 移动端触摸反馈 */
+  .touch-active:active {
+    @apply scale-95 opacity-80;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+}
+
+/* 滚动条样式 */
+@layer utilities {
+  /* Webkit 浏览器滚动条 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+/* 输入框焦点样式优化 */
+@layer components {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
