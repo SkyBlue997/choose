@@ -172,7 +172,8 @@ export const WheelSpinner: React.FC<WheelSpinnerProps> = ({ wheel, onSpinComplet
     }
 
     // 计算最终角度（指针指向获胜扇区的中心）
-    const winningAngle = (winningSegment.startAngle + winningSegment.endAngle) / 2;
+    // 使用 displayStartAngle 和 displayEndAngle，因为这是画布上实际绘制的角度
+    const winningAngle = (winningSegment.displayStartAngle + winningSegment.displayEndAngle) / 2;
     const spins = 5 + Math.random() * 3; // 5-8 圈
     const finalRotation = 360 * spins + (360 - winningAngle) + Math.random() * 20 - 10;
 
