@@ -175,7 +175,7 @@ export const useWheelsStore = () => {
 
   // 根据权重抽取结果
   const spinWheel = (wheel: Wheel): string => {
-    const { options, settings } = wheel;
+    const { options } = wheel;
 
     if (options.length === 0) {
       return '没有可选项';
